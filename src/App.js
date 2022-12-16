@@ -1,12 +1,14 @@
 import "./index.css";
 import { useState, useEffect } from "react";
-import { doc, onSnapshot, collection, query } from "firebase/firestore";
+import { onSnapshot, collection, query } from "firebase/firestore";
 import db from "./utils/firebase";
 import MenuPage from "./Components/MenuPage";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./Components/ProductsPage";
+import { useDispatch } from "react-redux";
 
 function App() {
+    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [purchases, setPurchases] = useState([]);
@@ -53,7 +55,11 @@ function App() {
         };
         getCustomers();
         getProducts();
+        getPurchases();
     }, []);
+    dispatch({ type: "CUSTOMERS/LOAD", payload: customers });
+    dispatch({ type: "PRODUCTS/LOAD", payload: products });
+
     return (
         <div className='container'>
             <Routes>

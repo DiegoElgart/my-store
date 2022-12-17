@@ -2,12 +2,21 @@
     display: flex;
     justify-content: center;
 }
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+}
 
 .menuOptions {
     height: 100px;
     width: 100px;
     border: 4px solid red;
     text-align: center;
+    padding: 5px;
+    margin: 5px;
 }
 
 .regions {
@@ -16,7 +25,6 @@
 }
 
 .region {
-    height: 500px;
     width: 500px;
     border: 3px black solid;
     border-radius: 5em;
@@ -30,4 +38,9 @@
     width: 200px;
     margin: 15px;
     padding: 15px;
+}
+
+.button {
+    margin: 5px;
+    padding: 5px;
 }

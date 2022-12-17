@@ -6,6 +6,7 @@ import MenuPage from "./Components/MenuPage";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./Components/ProductsPage";
 import { useDispatch } from "react-redux";
+import EditProductPage from "./Components/EditProductPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
             });
         };
         const getPurchases = () => {
-            const q = query(collection(db, "Purchases"));
+            const q = query(collection(db, "purchases"));
             onSnapshot(q, querySnapshot => {
                 setPurchases(
                     querySnapshot.docs.map(doc => {
@@ -59,12 +60,18 @@ function App() {
     }, []);
     dispatch({ type: "CUSTOMERS/LOAD", payload: customers });
     dispatch({ type: "PRODUCTS/LOAD", payload: products });
+    dispatch({ type: "PURCHASES/LOAD", payload: purchases });
 
     return (
         <div className='container'>
             <Routes>
-                <Route path='/' element={<MenuPage />} />
-                <Route path='/products' element={<ProductsPage />} />
+                <Route path='/' element={<MenuPage />}>
+                    <Route path='/products' element={<ProductsPage />} />
+                    <Route
+                        path='/products/edit/:id'
+                        element={<EditProductPage />}
+                    />
+                </Route>
             </Routes>
         </div>
     );

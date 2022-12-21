@@ -10,7 +10,9 @@ const MenuPage = () => {
             <div className='menuOptions'>
                 <Link to='/products'>Products</Link>
             </div>
-            <div className='menuOptions'>Customers</div>
+            <div className='menuOptions'>
+                <Link to='/customers'>Customers</Link>
+            </div>
             <div className='menuOptions'>Purchases</div>
             <br />
             <Outlet />

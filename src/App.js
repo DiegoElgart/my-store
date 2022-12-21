@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./Components/ProductsPage";
 import { useDispatch } from "react-redux";
 import EditProductPage from "./Components/EditProductPage";
+import CustomersPage from "./Components/CustomersPage";
+import EditCustomerPage from "./Components/EditCustomerPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -70,6 +72,11 @@ function App() {
                     <Route
                         path='/products/edit/:id'
                         element={<EditProductPage />}
+                    />
+                    <Route path='/customers' element={<CustomersPage />} />
+                    <Route
+                        path='/customers/edit/:id'
+                        element={<EditCustomerPage />}
                     />
                 </Route>
             </Routes>

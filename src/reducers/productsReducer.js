@@ -9,8 +9,6 @@ import {
 } from "firebase/firestore";
 import db from "../utils/firebase";
 
-const initialValue = { products: [] };
-
 const deleteProduct = async id => {
     await deleteDoc(doc(db, "products", id));
 };
@@ -18,6 +16,7 @@ const updateProduct = async (id, obj) => {
     const docRef = doc(db, "products", id);
     await updateDoc(docRef, obj);
 };
+const initialValue = { products: [] };
 //state - current state
 //action = {type:"WHAT TO DO", [payload:value]}
 

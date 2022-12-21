@@ -1,7 +1,10 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ProductComp = ({ product }) => {
+    //const customers = useSelector(state => state.customersReducer.customers);
+    const purchases = useSelector(state => state.purchasesReducer.purchases);
+    console.log(purchases);
     return (
         <div className='card'>
             <ul>

@@ -2,38 +2,43 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
-const EditProductPage = () => {
+const EditCustomerPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [product, setProduct] = useState({
-        name: "",
-        price: "",
-        quantity: "",
+
+    const [customer, setCustomer] = useState({
+        first_name: "",
+        last_name: "",
+        city: "",
     });
+
     const { id } = useParams();
-    const products = useSelector(state => state.productsReducer.products);
+    const customers = useSelector(state => state.customersReducer.customers);
 
     useEffect(() => {
-        const getProduct = () => {
-            const productForEdit = products.find(product => product.id === id);
-            setProduct(productForEdit);
+        const getCustomer = () => {
+            const customerForEdit = customers.find(
+                customer => customer.id === id
+            );
+            setCustomer(customerForEdit);
         };
-        getProduct();
+        getCustomer();
     }, []);
-    const deleteProduct = () => {
-        dispatch({ type: "PRODUCTS/DELETE", payload: id });
-        navigate("/products");
-    };
     const handleChange = e => {
         let { name, value } = e.target;
         value = isNaN(value) ? value : +value;
-        setProduct({ ...product, [name]: value });
+        setCustomer({ ...customer, [name]: value });
     };
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch({ type: "PRODUCTS/UPDATE", payload: product });
-        navigate("/products");
+        dispatch({ type: "CUSTOMERS/UPDATE", payload: customer });
+        navigate("/customers");
+    };
+
+    const deleteCustomer = () => {
+        dispatch({ type: "CUSTOMERS/DELETE", payload: id });
+        navigate("/customers");
     };
     return (
         <div
@@ -49,34 +54,35 @@ const EditProductPage = () => {
             }}>
             <div className='region'>
                 <form onSubmit={handleSubmit}>
-                    <label>Name: </label>
+                    <label>First Name: </label>
                     <input
-                        defaultValue={product.name}
+                        defaultValue={customer.first_name}
                         onChange={handleChange}
-                        name='name'
+                        name='first_name'
                     />
-
                     <br />
-                    <label>Price: </label>
+                    <label>Last Name: </label>
                     <input
-                        defaultValue={product.price}
+                        defaultValue={customer.last_name}
+                        onChange={handleChange}
+                        name='last_name'
+                    />
+                    <br />
+                    <label>City: </label>
+                    <input
+                        defaultValue={customer.city}
                         name='price'
                         onChange={handleChange}
                     />
                     <br />
-                    <label>Quantity: </label>
-                    <input
-                        defaultValue={product.quantity}
-                        name='quantity'
-                        onChange={handleChange}
-                    />
+
                     <br />
                     <input type='submit' className='button' value='Update' />
                     <input
                         type='button'
                         className='button'
                         value='Delete'
-                        onClick={deleteProduct}
+                        onClick={deleteCustomer}
                     />
                 </form>
             </div>
@@ -85,4 +91,4 @@ const EditProductPage = () => {
     );
 };
 
-export default EditProductPage;
+export default EditCustomerPage;

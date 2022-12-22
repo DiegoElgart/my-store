@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import EditProductPage from "./Components/EditProductPage";
 import CustomersPage from "./Components/CustomersPage";
 import EditCustomerPage from "./Components/EditCustomerPage";
+import PurchasesPage from "./Components/PurchasesPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -78,6 +79,7 @@ function App() {
                         path='/customers/edit/:id'
                         element={<EditCustomerPage />}
                     />
+                    <Route path='/purchases' element={<PurchasesPage />} />
                 </Route>
             </Routes>
         </div>

@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductComp = ({ product }) => {
     //const customers = useSelector(state => state.customersReducer.customers);
-    const purchases = useSelector(state => state.purchasesReducer.purchases);
-    console.log(purchases);
+    // const purchases = useSelector(state => state.purchasesReducer.purchases);
     return (
         <div className='card'>
             <ul>

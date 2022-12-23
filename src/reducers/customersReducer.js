@@ -17,15 +17,25 @@ const updateCustomer = async (id, obj) => {
     const docRef = doc(db, "customers", id);
     await updateDoc(docRef, obj);
 };
+
+const addUser = async obj => {
+    const docRef = await addDoc(collection(db, "customers"), obj);
+    console.log(docRef.id);
+};
 const initialValue = { customers: [] };
 
 //state - current state
 //action = {type:"WHAT TO DO", [payload:value]}
 
-const customersReducer = (state = initialValue, action) => {
+const customersReducer = async (state = initialValue, action) => {
     switch (action.type) {
         case "CUSTOMERS/LOAD":
             return { ...state, customers: action.payload };
+
+        case "CUSTOMERS/NEW": {
+            addUser(action.payload);
+            return { ...state };
+        }
         case "CUSTOMERS/DELETE": {
             const customers = state.customers.filter(
                 cust => cust.id !== action.payload

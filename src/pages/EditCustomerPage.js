@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import MenuComp from "../Components/MenuComp";
 
 const EditCustomerPage = () => {
     const dispatch = useDispatch();

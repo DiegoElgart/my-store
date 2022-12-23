@@ -2,14 +2,18 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { onSnapshot, collection, query } from "firebase/firestore";
 import db from "./utils/firebase";
-import MenuPage from "./Components/MenuPage";
 import { Route, Routes } from "react-router-dom";
-import ProductsPage from "./Components/ProductsPage";
 import { useDispatch } from "react-redux";
-import EditProductPage from "./Components/EditProductPage";
-import CustomersPage from "./Components/CustomersPage";
-import EditCustomerPage from "./Components/EditCustomerPage";
-import PurchasesPage from "./Components/PurchasesPage";
+import MenuPage from "./Components/MenuComp";
+import ProductsPage from "./pages/ProductsPage";
+import EditProductPage from "./pages/EditProductPage";
+import CustomersPage from "./pages/CustomersPage";
+import EditCustomerPage from "./pages/EditCustomerPage";
+import PurchasesPage from "./pages/PurchasesPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
+import MenuComp from "./Components/MenuComp";
 
 function App() {
     const dispatch = useDispatch();
@@ -67,20 +71,22 @@ function App() {
 
     return (
         <div className='container'>
+            <MenuComp />
             <Routes>
-                <Route path='/' element={<MenuPage />}>
-                    <Route path='/products' element={<ProductsPage />} />
-                    <Route
-                        path='/products/edit/:id'
-                        element={<EditProductPage />}
-                    />
-                    <Route path='/customers' element={<CustomersPage />} />
-                    <Route
-                        path='/customers/edit/:id'
-                        element={<EditCustomerPage />}
-                    />
-                    <Route path='/purchases' element={<PurchasesPage />} />
-                </Route>
+                <Route path='/' element={<HomePage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/register' element={<RegisterPage />} />
+                <Route path='/products' element={<ProductsPage />} />
+                <Route
+                    path='/products/edit/:id'
+                    element={<EditProductPage />}
+                />
+                <Route path='/customers' element={<CustomersPage />} />
+                <Route
+                    path='/customers/edit/:id'
+                    element={<EditCustomerPage />}
+                />
+                <Route path='/purchases' element={<PurchasesPage />} />
             </Routes>
         </div>
     );

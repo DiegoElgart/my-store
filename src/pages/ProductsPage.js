@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ProductComp from "./ProductComp";
+import MenuComp from "../Components/MenuComp";
+import ProductComp from "../Components/ProductComp";
 const ProductsPage = () => {
     const products = useSelector(state => state.productsReducer.products);
     return (

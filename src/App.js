@@ -4,7 +4,6 @@ import { onSnapshot, collection, query } from "firebase/firestore";
 import db from "./utils/firebase";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import MenuPage from "./Components/MenuComp";
 import ProductsPage from "./pages/ProductsPage";
 import EditProductPage from "./pages/EditProductPage";
 import CustomersPage from "./pages/CustomersPage";
@@ -22,6 +21,7 @@ function App() {
     const [purchases, setPurchases] = useState([]);
 
     useEffect(() => {
+      
         const getProducts = () => {
             const q = query(collection(db, "products"));
             onSnapshot(q, querySnapshot => {
@@ -35,7 +35,7 @@ function App() {
                 );
             });
         };
-        const getCustomers = () => {
+        const getCustomers = async () => {
             const q = query(collection(db, "customers"));
             onSnapshot(q, querySnapshot => {
                 setCustomers(

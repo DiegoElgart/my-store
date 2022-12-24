@@ -28,25 +28,36 @@ const RegisterPage = () => {
     const handleSubmit = e => {
         e.preventDefault();
         const hashPassword = bcrypt.hashSync(password, salt);
-
-        if (password === password2) {
-            const obj = {
-                first_name: fname,
-                last_name: lname,
-                password: hashPassword,
-                role: "admin",
-                city: city,
-            };
-            dispatch({ type: "CUSTOMERS/NEW", payload: obj });
+        if (fname !== "" && lname !== "" && username !== "" && city !== "") {
+            if (password === password2) {
+                const obj = {
+                    first_name: fname,
+                    last_name: lname,
+                    username: username,
+                    password: hashPassword,
+                    role: "admin",
+                    city: city,
+                };
+                sessionStorage.token = JSON.stringify(obj);
+                dispatch({ type: "CUSTOMERS/NEW", payload: obj });
+                dispatch({ type: "LOGIN" });
+            } else {
+                setFormData(prevState => ({
+                    ...prevState,
+                    password: "",
+                    password2: "",
+                }));
+                alert("Password Confirmation does not match ");
+            }
+            navigate("/");
         } else {
+            alert("You must fill ALL the fields");
             setFormData(prevState => ({
                 ...prevState,
                 password: "",
                 password2: "",
             }));
-            alert("Password Confirmation does not match ");
         }
-        navigate("/");
     };
 
     return (

@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MenuComp from "../Components/MenuComp";
 import ProductComp from "../Components/ProductComp";
 const ProductsPage = () => {
     const products = useSelector(state => state.productsReducer.products);
+    const purchases = useSelector(state => state.purchasesReducer.purchases);
+
     return (
-        <div className='container'>
-            <div className='region'>
-                <h1>There are X in the cart</h1>
+        <div className='container' style={{ display: "flex" }}>
+            <div className='card' style={{ height: "150px" }}>
+                <h1>There are {purchases.length} in the cart</h1>
             </div>
             <div className='region'>
                 {products.map(product => (

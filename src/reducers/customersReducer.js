@@ -1,13 +1,11 @@
 import {
-    query,
     collection,
     doc,
-    onSnapshot,
     addDoc,
     deleteDoc,
     updateDoc,
 } from "firebase/firestore";
-import { act } from "react-dom/test-utils";
+
 import db from "../utils/firebase";
 
 const deleteCustomer = async id => {
@@ -22,19 +20,20 @@ const addUser = async obj => {
     const docRef = await addDoc(collection(db, "customers"), obj);
     console.log(docRef.id);
 };
-const initialValue = { customers: [] };
 
 //state - current state
 //action = {type:"WHAT TO DO", [payload:value]}
+const initialValue = { customers: [] };
 
-const customersReducer = async (state = initialValue, action) => {
+const customersReducer = (state = initialValue, action) => {
     switch (action.type) {
-        case "CUSTOMERS/LOAD":
+        case "CUSTOMERS/LOAD": {
             return { ...state, customers: action.payload };
-
+        }
         case "CUSTOMERS/NEW": {
             addUser(action.payload);
-            return { ...state };
+            const customers = [...state.customers, action.payload];
+            return { ...state, customers };
         }
         case "CUSTOMERS/DELETE": {
             const customers = state.customers.filter(

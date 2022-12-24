@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs";
 
 const LoginPage = () => {
+    const customers = useSelector(state => state.customersReducer.customers);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
-        fname: "",
-        lname: "",
-        email: "",
+        username: "",
         password: "",
-        password2: "",
-        city: "",
     });
+    const [isLogIn, setIsLogIn] = useState(false);
 
     const { username, password } = formData;
 
@@ -20,6 +23,17 @@ const LoginPage = () => {
     };
     const handleSubmit = e => {
         e.preventDefault();
+        const user = customers.find(
+            customer => customer.username === formData.username
+        );
+        if (bcrypt.compareSync(password, user.password)) {
+            setIsLogIn(true);
+            dispatch({ type: "LOGIN" });
+            navigate("/customers");
+        } else {
+            sessionStorage.clear();
+            alert("WRONG PASSWORD!");
+        }
     };
 
     return (
@@ -49,7 +63,7 @@ const LoginPage = () => {
                         />
                     </div>
 
-                    <div class='form-group'>
+                    <div className='form-group'>
                         <input
                             type='submit'
                             className='btn btn-block'

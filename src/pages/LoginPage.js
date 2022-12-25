@@ -27,8 +27,9 @@ const LoginPage = () => {
             customer => customer.username === formData.username
         );
         if (bcrypt.compareSync(password, user.password)) {
+            user.isLoggedIn = true;
             setIsLogIn(true);
-            dispatch({ type: "LOGIN" });
+            dispatch({ type: "LOGIN", payload: user });
             navigate("/customers");
         } else {
             sessionStorage.clear();

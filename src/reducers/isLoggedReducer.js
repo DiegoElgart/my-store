@@ -1,12 +1,12 @@
-const initialValue = { isLoggedIn: false };
+const initialValue = { currentUser: { user: {} } };
 
 const isLoggedInReducer = (state = initialValue, action) => {
     switch (action.type) {
         case "LOGIN": {
-            return { ...state, isLoggedIn: true };
+            return { ...state, currentUser: action.payload };
         }
         case "LOGOUT": {
-            return { ...state, isLoggedIn: false };
+            return { ...state, currentUser: { user: { isLoggedIn: false } } };
         }
 
         default:

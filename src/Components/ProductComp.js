@@ -7,7 +7,7 @@ const ProductComp = ({ product }) => {
 
     const customers = useSelector(state => state.customersReducer.customers);
     const purchases = useSelector(state => state.purchasesReducer.purchases);
-    console.log(purchases[0].date);
+    console.log(purchases[0].date.toDate());
     useEffect(() => {
         if (purchases[0].product.id === product.id) {
             let customer = customers.find(

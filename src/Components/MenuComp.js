@@ -2,7 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const MenuComp = () => {
-    const isLogged = useSelector(state => state.isLoggedInReducer.isLoggedIn);
+    const currentUser = useSelector(
+        state => state.isLoggedInReducer.currentUser
+    );
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const logout = () => {
@@ -16,7 +18,7 @@ const MenuComp = () => {
                     <Link to='/'>Home</Link>
                 </li>
 
-                {!isLogged ? (
+                {!currentUser.isLoggedIn ? (
                     <>
                         <li>
                             <Link to='/login'>Login</Link>
@@ -26,21 +28,22 @@ const MenuComp = () => {
                         </li>
                     </>
                 ) : null}
+                {currentUser.isLoggedIn ? (
+                    <>
+                        <li>
+                            <Link to='/products'>Products</Link>
+                        </li>
+                        <li>
+                            <Link to='/customers'>Customers</Link>
+                        </li>
+                        <li>
+                            <Link to='/purchases'>Purchases</Link>
+                        </li>
 
-                <li>
-                    <Link to='/products'>Products</Link>
-                </li>
-                <li>
-                    <Link to='/customers'>Customers</Link>
-                </li>
-                <li>
-                    <Link to='/purchases'>Purchases</Link>
-                </li>
-
-                {isLogged ? (
-                    <li className='btn' onClick={logout}>
-                        Logout
-                    </li>
+                        <li className='btn' onClick={logout}>
+                            Logout
+                        </li>
+                    </>
                 ) : null}
             </ul>
             <br />

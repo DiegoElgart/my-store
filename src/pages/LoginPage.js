@@ -11,7 +11,6 @@ const LoginPage = () => {
         username: "",
         password: "",
     });
-    const [isLogIn, setIsLogIn] = useState(false);
 
     const { username, password } = formData;
 
@@ -27,10 +26,8 @@ const LoginPage = () => {
             customer => customer.username === formData.username
         );
         if (bcrypt.compareSync(password, user.password)) {
-            user.isLoggedIn = true;
-            setIsLogIn(true);
             dispatch({ type: "LOGIN", payload: user });
-            navigate("/customers");
+            navigate("/");
         } else {
             sessionStorage.clear();
             alert("WRONG PASSWORD!");
@@ -38,7 +35,7 @@ const LoginPage = () => {
     };
 
     return (
-        <>
+        <div className='container'>
             <section className='heading'>
                 <h1>Login</h1>
                 <p>Log in to your account</p>
@@ -73,7 +70,7 @@ const LoginPage = () => {
                     </div>
                 </form>
             </section>
-        </>
+        </div>
     );
 };
 

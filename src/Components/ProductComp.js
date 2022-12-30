@@ -1,21 +1,19 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-const ProductComp = ({ product }) => {
-    const [customer, setCustomer] = useState({});
-    const [date, setDate] = useState("");
-
-    const customers = useSelector(state => state.customersReducer.customers);
+import ProductHistory from "./ProductHistory";
+const ProductComp = ({ product, handleModal }) => {
+    const [buyHistory, setBuyHistory] = useState([]);
     const purchases = useSelector(state => state.purchasesReducer.purchases);
-    console.log(purchases[0].date.toDate());
+    //console.log(purchases[0].date.toDate());
     useEffect(() => {
-        if (purchases[0].product.id === product.id) {
-            let customer = customers.find(
-                customer => customer.id === purchases[0].customer.id
+        const checkHistory = () => {
+            const buyHistory = purchases.filter(
+                purchase => purchase.product.id === product.id
             );
-
-            setCustomer(customer);
-        }
+            setBuyHistory(buyHistory);
+        };
+        checkHistory();
     }, []);
 
     return (
@@ -29,12 +27,14 @@ const ProductComp = ({ product }) => {
                 <br />
                 <div>
                     <h5>Customers that bought this</h5>
-                    <ul>
-                        <li>{customer.first_name}</li>
-                        <li>Bought: </li>
-                    </ul>
+                    {buyHistory.map(purchase => (
+                        <ProductHistory
+                            key={purchase.id}
+                            buyer={purchase.customer}
+                            date={purchase.date}></ProductHistory>
+                    ))}
                     <br />
-                    <button>Add</button>
+                    <button onClick={handleModal}>Add</button>
                 </div>
             </ul>
         </div>

@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function CustomerComp({ customer }) {
+    const purchases = useSelector(state => state.purchasesReducer.purchases);
+
     return (
         <tr>
             <td>

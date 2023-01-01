@@ -21,7 +21,7 @@ const ProductsPage = () => {
             setCurrentPurchase(currentPurchase);
         };
         checkPurchase();
-    }, []);
+    }, [openModal]);
     const handleModal = () => {
         setOpenModal(!openModal);
     };

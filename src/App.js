@@ -2,7 +2,7 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { onSnapshot, collection, query } from "firebase/firestore";
 import db from "./utils/firebase";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsPage from "./pages/ProductsPage";
 import EditProductPage from "./pages/EditProductPage";
@@ -13,11 +13,9 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import MenuComp from "./Components/MenuComp";
-import isLoggedInReducer from "./reducers/isLoggedReducer";
 
 function App() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [purchases, setPurchases] = useState([]);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import CustomerList from "../Components/CustomerList";
 
 const EditProductPage = () => {
     const dispatch = useDispatch();
@@ -10,15 +11,28 @@ const EditProductPage = () => {
         price: "",
         quantity: "",
     });
+    const [purchasesOfCurrentProduct, setPurchasesOfCurrentProduct] = useState(
+        []
+    );
+
     const { id } = useParams();
     const products = useSelector(state => state.productsReducer.products);
+    const purchases = useSelector(state => state.purchasesReducer.purchases);
 
     useEffect(() => {
         const getProduct = () => {
             const productForEdit = products.find(product => product.id === id);
             setProduct(productForEdit);
         };
+        const getPurchases = () => {
+            const searchPurchase = purchases.filter(
+                purchase => purchase.product.id === id
+            );
+            setPurchasesOfCurrentProduct(searchPurchase);
+        };
+
         getProduct();
+        getPurchases();
     }, []);
     const deleteProduct = () => {
         dispatch({ type: "PRODUCTS/DELETE", payload: id });
@@ -80,7 +94,18 @@ const EditProductPage = () => {
                     />
                 </form>
             </div>
-            <div className='region'>Region 2</div>
+            <div>
+                <h3>Persons who bought this product:</h3>
+
+                <ul>
+                    {purchasesOfCurrentProduct.map(customerList => (
+                        <CustomerList
+                            key={customerList.id}
+                            customerForList={customerList.customer.id}
+                        />
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

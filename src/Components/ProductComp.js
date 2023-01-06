@@ -5,7 +5,6 @@ import ProductHistory from "./ProductHistory";
 const ProductComp = ({ product, handleModal }) => {
     const [buyHistory, setBuyHistory] = useState([]);
     const purchases = useSelector(state => state.purchasesReducer.purchases);
-    //console.log(purchases[0].date.toDate());
     useEffect(() => {
         const checkHistory = () => {
             const buyHistory = purchases.filter(

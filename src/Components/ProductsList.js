@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const ProductsList = ({ productForList }) => {
     const [productList, setProductList] = useState([]);
+
     const products = useSelector(state => state.productsReducer.products);
 
     useEffect(() => {
@@ -13,6 +14,7 @@ const ProductsList = ({ productForList }) => {
             );
             setProductList(product);
         };
+
         getProduct();
     }, []);
     return (

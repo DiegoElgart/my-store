@@ -13,6 +13,11 @@ a {
     text-decoration: none;
     color: #000;
 }
+a:hover {
+    text-decoration: none;
+    transition: ease-in;
+    color: rgb(85, 81, 81);
+}
 ul {
     list-style: none;
 }
@@ -149,4 +154,14 @@ li {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+tr {
+    border: #777 solid 2px;
+    margin: 5px;
+    padding: 5px;
+    background-color: lightgray;
+}
+tr:nth-child(2n + 1) {
+    background-color: rgb(197, 177, 177);
 }

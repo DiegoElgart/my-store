@@ -73,7 +73,7 @@ function App() {
 
     return (
         <>
-            <MenuComp />
+            <MenuComp isAuthenticated={isAuthenticated} />
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />

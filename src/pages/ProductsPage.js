@@ -21,17 +21,20 @@ const ProductsPage = () => {
             setCurrentPurchase(currentPurchase);
         };
         checkPurchase();
-    }, [openModal]);
+    }, []);
     const handleModal = () => {
         setOpenModal(!openModal);
     };
     return (
         <>
-            {openModal && <ModalComponent handleModal={handleModal} />}
+            {openModal && (
+                <ModalComponent
+                    handleModal={handleModal}
+                    currentUser={currentUser}
+                    products={products}
+                />
+            )}
             <div className='container' style={{ display: "flex" }}>
-                <div className='card' style={{ height: "150px" }}>
-                    <h1>There are {currentPurchase.length} in the cart</h1>
-                </div>
                 <div className='region'>
                     {products.map(product => (
                         <ProductComp
@@ -40,6 +43,14 @@ const ProductsPage = () => {
                             handleModal={handleModal}
                         />
                     ))}
+                </div>
+                <div
+                    className='card'
+                    style={{
+                        height: "150px",
+                        padding: "25px",
+                    }}>
+                    <h1>There are {currentPurchase.length} in the cart</h1>
                 </div>
             </div>
         </>

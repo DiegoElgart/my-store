@@ -1,10 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const MenuComp = () => {
-    const isAuthenticated = useSelector(
-        state => state.isLoggedInReducer.currentUser.isAuthenticated
-    );
+const MenuComp = ({ isAuthenticated }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const logout = () => {

@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { redirect } from "react-router-dom";
 import { doc } from "firebase/firestore";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./Modal.css";
 import db from "../utils/firebase";
 
-const ModalComponent = ({ handleModal }) => {
+const ModalComponent = ({ handleModal, currentUser, products }) => {
     const [currentProduct, setCurrentProduct] = useState("");
     const dispatch = useDispatch();
-    const products = useSelector(state => state.productsReducer.products);
-    const currentUser = useSelector(
-        state => state.isLoggedInReducer.currentUser
-    );
 
     const handleChange = e => {
         setCurrentProduct(e.target.value);
@@ -32,7 +28,9 @@ const ModalComponent = ({ handleModal }) => {
     return (
         <div className='modalBackground'>
             <div className='modalContainer'>
-                <span onClick={handleModal}>&times;</span>
+                <span className='titleCloseBtn'>
+                    <button onClick={handleModal}>&times;</button>
+                </span>
                 <br />
                 <label>Products</label>
                 <select onChange={handleChange}>
